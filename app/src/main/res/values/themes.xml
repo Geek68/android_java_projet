@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <style name="Theme.Android_java_projet" parent="android:Theme.Material.Light.NoActionBar" />
-</resources>
