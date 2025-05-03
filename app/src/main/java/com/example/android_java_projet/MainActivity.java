@@ -14,6 +14,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import java.util.ArrayList;
 import java.util.List;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity implements EnseignantAdapter.OnItemClickListener {
     private RecyclerView enseignantRecyclerView;
@@ -35,7 +36,6 @@ public class MainActivity extends AppCompatActivity implements EnseignantAdapter
         enseignantList = new ArrayList<>();
         adapter = new EnseignantAdapter(this, enseignantList, this);
 
-        // Configuration du RecyclerView
         enseignantRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         enseignantRecyclerView.setAdapter(adapter);
 
@@ -64,14 +64,23 @@ public class MainActivity extends AppCompatActivity implements EnseignantAdapter
                     enseignantList.addAll(response.body());
                     adapter.notifyDataSetChanged();
 
-                    // Gestion de la vue vide
+                    // Log pour déboguer
+                    Log.d("MainActivity", "Nombre d'enseignants: " + enseignantList.size());
+                    for (Enseignant e : enseignantList) {
+                        Log.d("MainActivity", "Enseignant: " + e.getMatricule() + ", Nom: " + e.getNom());
+                    }
+
                     findViewById(R.id.emptyView).setVisibility(
                             enseignantList.isEmpty() ? View.VISIBLE : View.GONE);
+                } else {
+                    Log.e("MainActivity", "Erreur API: " + response.code());
+                    Toast.makeText(MainActivity.this, "Erreur: " + response.message(), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Enseignant>> call, Throwable t) {
+                Log.e("MainActivity", "Erreur réseau", t);
                 Toast.makeText(MainActivity.this, "Erreur: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
@@ -83,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements EnseignantAdapter
             public void onResponse(Call<Stats> call, Response<Stats> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Stats stats = response.body();
-                    String statsText = String.format("Total: %d\nMin: %.2f\nMax: %.2f",
+                    String statsText = String.format("Total: %f\nMin: %.2f\nMax: %.2f",
                             stats.getTotal(), stats.getMin(), stats.getMax());
                     statsTextView.setText(statsText);
                 }

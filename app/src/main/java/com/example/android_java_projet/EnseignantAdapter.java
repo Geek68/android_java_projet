@@ -14,13 +14,11 @@ public class EnseignantAdapter extends RecyclerView.Adapter<EnseignantAdapter.Vi
     private final List<Enseignant> enseignants;
     private final OnItemClickListener listener;
 
-    // Interface pour gérer les clics
     public interface OnItemClickListener {
         void onEditClick(Enseignant enseignant);
         void onDeleteClick(Enseignant enseignant);
     }
 
-    // ViewHolder pour les éléments de la liste
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView matriculeTextView, nomTextView, prestationTextView;
         public Button editButton, deleteButton;
@@ -53,7 +51,10 @@ public class EnseignantAdapter extends RecyclerView.Adapter<EnseignantAdapter.Vi
 
         holder.matriculeTextView.setText(enseignant.getMatricule());
         holder.nomTextView.setText(enseignant.getNom());
-        holder.prestationTextView.setText(String.valueOf(enseignant.getPrestation()));
+        holder.prestationTextView.setText(String.format("%.2f€ (%d h × %.2f€/h)",
+                enseignant.getPrestation(),
+                enseignant.getNombreHeures(),
+                enseignant.getTauxhoraire()));
 
         holder.editButton.setOnClickListener(v -> listener.onEditClick(enseignant));
         holder.deleteButton.setOnClickListener(v -> listener.onDeleteClick(enseignant));
