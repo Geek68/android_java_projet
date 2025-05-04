@@ -79,7 +79,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Total Enseignants"
+                                android:text="Enseignants"
                                 android:textColor="@color/textSecondary"
                                 android:textSize="14sp" />
 
@@ -102,7 +102,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Total Heures"
+                                android:text="Heures"
                                 android:textColor="@color/textSecondary"
                                 android:textSize="14sp" />
 
@@ -125,7 +125,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Budget Total"
+                                android:text="Budgets"
                                 android:textColor="@color/textSecondary"
                                 android:textSize="14sp" />
 

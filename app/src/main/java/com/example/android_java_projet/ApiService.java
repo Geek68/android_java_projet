@@ -19,4 +19,7 @@ public interface ApiService {
 
     @GET("enseignants/stats")
     Call<Stats> getStats();
+
+    @GET("enseignants/top")
+    Call<List<Enseignant>> getTopEnseignants();
 }
